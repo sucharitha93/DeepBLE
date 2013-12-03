@@ -18,9 +18,21 @@ import android.os.IBinder;
 import android.util.Log;
 
 /**
- * All Bluetooth related services are handled in BluetoothLeService
+ * "A service is a collection of characteristics."
+ * "A characteristic contains a single value and 0-n descriptors that describe 
+ *  the characteristic's value. A characteristic can be thought of as a type, 
+ *  analogous to a class."
+ *  
+ * The calculation of position will be handled here.
  * 
- * The calculation of position will also be handled here.
+ * Generic Attribute Profile (GATT)ÑThe GATT profile is a general specification 
+ * for sending and receiving short pieces of data known as "attributes" over a 
+ * BLE link. All current Low Energy application profiles are based on GATT.
+ * 		PXP - Proximity Profile
+ * 		LNP & LNS - Location and Navigation Profile/Service
+ * 		DIS - Device Information Service
+ * 		
+ * 
  */
 
 public class BluetoothLeService extends Service{
