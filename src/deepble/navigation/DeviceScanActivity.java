@@ -34,14 +34,18 @@ public class DeviceScanActivity extends Activity {
     private static final long SCAN_PERIOD = 10000;
 
 	@Override
+	
+	/* 
+	 * Initializes Bluetooth adapter (enables devices to discover each other)
+	 * 
+	 * Ensures Bluetooth is available on the device and it it enabled. If not,
+	 * a dialog requesting user permisison to enable Bluetooth is displayed.
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
-		// Initializes Bluetooth adapter.
 		final BluetoothManager bluetoothManager =
 		        (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
 		mBluetoothAdapter = bluetoothManager.getAdapter();
 		
-		// Ensures Bluetooth is available on the device and it is enabled. If not,
-		// displays a dialog requesting user permission to enable Bluetooth.
 		if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
@@ -90,64 +94,62 @@ public class DeviceScanActivity extends Activity {
 	    @Override
 	    public void onLeScan(final BluetoothDevice device, int rssi,
 	            byte[] scanRecord) {
-	        runOnUiThread(new Runnable() {
-	           
-	           public void run() {
-	        	   //TODO - Look into LeDeviceListAdapter, what it does, why we need it
-	        	   mLeDeviceListAdapter = new LeDeviceListAdapter();
-	               mLeDeviceListAdapter.addDevice(device);
-	               //mLeDeviceListAdapter.notifyDataSetChanged();
-	           }
-	       });
-	   }
+	    	runOnUiThread(new Runnable() {
+	    		public void run() {
+	    			//TODO - Look into LeDeviceListAdapter, what it does, why we need it
+	    			mLeDeviceListAdapter = new LeDeviceListAdapter();
+	    			mLeDeviceListAdapter.addDevice(device);
+	    			//mLeDeviceListAdapter.notifyDataSetChanged();
+	    		}
+	    	});
+	    }
 	};
 	
 	// Adapter for holding devices found through scanning.
 	private class LeDeviceListAdapter extends BaseAdapter {
-	private ArrayList<BluetoothDevice> mLeDevices;
-	        private LayoutInflater mInflator;
-	
-	        public LeDeviceListAdapter() {
-	            super();
-	            mLeDevices = new ArrayList<BluetoothDevice>();
-	            mInflator = DeviceScanActivity.this.getLayoutInflater();
-	        }
-	
-	        public void addDevice(BluetoothDevice device) {
-	            if(!mLeDevices.contains(device)) {
-	                mLeDevices.add(device);
-	            }
-	        }
-	
-	        public BluetoothDevice getDevice(int position) {
-	            return mLeDevices.get(position);
-	        }
-	
-	        public void clear() {
-	            mLeDevices.clear();
-	        }
-	
-	        @Override
-	        public int getCount() {
-	            return mLeDevices.size();
-	        }
-	
-	        @Override
-	        public Object getItem(int i) {
-	            return mLeDevices.get(i);
-	        }
-	
-	        @Override
-	        public long getItemId(int i) {
-	            return i;
-	        }
-
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				// TODO Possibly get back to this later.
-				return null;
+		private ArrayList<BluetoothDevice> mLeDevices;
+		private LayoutInflater mInflator;
+		
+		public LeDeviceListAdapter() {
+			super();
+			mLeDevices = new ArrayList<BluetoothDevice>();
+			mInflator = DeviceScanActivity.this.getLayoutInflater();
+		}
+		
+		public void addDevice(BluetoothDevice device) {
+			if(!mLeDevices.contains(device)) {
+				mLeDevices.add(device);
 			}
-	      
-	    }
+		}
+		
+		public BluetoothDevice getDevice(int position) {
+			return mLeDevices.get(position);
+		}
+		
+		public void clear() {
+			mLeDevices.clear();
+		}
+		
+		@Override
+		public int getCount() {
+			return mLeDevices.size();
+		}
+		
+		@Override
+		public Object getItem(int i) {
+			return mLeDevices.get(i);
+		}
+		
+		@Override
+		public long getItemId(int i) {
+			return i;
+		}
+		
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			// TODO Possibly get back to this later.
+			return null;
+		}
+	}
 
 }
