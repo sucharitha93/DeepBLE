@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +37,8 @@ public class DeviceScanActivity extends Activity {
 	@Override
 	
 	/* 
-	 * Initializes Bluetooth adapter (enables devices to discover each other)
+	 * Initializes Bluetooth adapter (enables devices to discover each other,
+	 * represents the actual Bluetooth radio)
 	 * 
 	 * Ensures Bluetooth is available on the device and it it enabled. If not,
 	 * a dialog requesting user permisison to enable Bluetooth is displayed.
@@ -102,6 +104,10 @@ public class DeviceScanActivity extends Activity {
 	    			//mLeDeviceListAdapter.notifyDataSetChanged();
 	    		}
 	    	});
+	    }
+	    
+	    public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+	    	//TODO - Start reading/writing characteristics
 	    }
 	};
 	
