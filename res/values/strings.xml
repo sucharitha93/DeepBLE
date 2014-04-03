@@ -6,5 +6,8 @@
     <string name="view_devices">View Devices</string>
     <string name="view_information">View Information</string>
     <string name="set_anchor">Set Device as Anchor</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="set_device">Revert to Device</string>
 
 </resources>
