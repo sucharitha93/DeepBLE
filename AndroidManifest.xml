@@ -37,6 +37,10 @@
             android:name="deepble.navigation.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        <activity
+            android:name="deepble.navigation.DeviceContextActivity"
+            android:label="@string/title_activity_context" >
+        </activity>
     </application>
 
 </manifest>
