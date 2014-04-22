@@ -52,15 +52,33 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        public static final int ble_not_supported=0x7f06000e;
+        public static final int connected=0x7f060013;
         public static final int current_anchor=0x7f06000c;
+        public static final int disconnected=0x7f060014;
         public static final int edit=0x7f06000a;
+        public static final int error_bluetooth_not_supported=0x7f060016;
         public static final int hello_world=0x7f060006;
+        public static final int label_data=0x7f06000f;
+        public static final int label_device_address=0x7f060010;
+        public static final int label_state=0x7f060011;
+        /**  Menu items 
+         */
+        public static final int menu_connect=0x7f06001a;
+        public static final int menu_disconnect=0x7f06001b;
+        public static final int menu_scan=0x7f06001c;
+        public static final int menu_stop=0x7f06001d;
         public static final int name=0x7f060009;
+        public static final int no_data=0x7f060012;
         public static final int save=0x7f06000d;
         public static final int set_anchor=0x7f060004;
         public static final int set_device=0x7f060007;
         public static final int title_activity_context=0x7f060008;
         public static final int title_activity_main=0x7f060005;
+        public static final int title_devices=0x7f060015;
+        public static final int unknown_characteristic=0x7f060018;
+        public static final int unknown_device=0x7f060017;
+        public static final int unknown_service=0x7f060019;
         public static final int uuid=0x7f06000b;
         public static final int view_devices=0x7f060002;
         public static final int view_information=0x7f060003;

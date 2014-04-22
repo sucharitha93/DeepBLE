@@ -1,10 +1,7 @@
 package deepble.navigation;
 
-import deepble.navigation.*;
-
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -53,6 +50,16 @@ public class MainActivity extends Activity {
 //			Intent intent = new Intent(mContext, NAME_OF_ANCHOR_ACTIVITY.class);
 //			startActivity(intent);
 		}
+	}
+	
+	public void onClickViewInformation(View view) {
+		Intent intent = new Intent(mContext, DeviceScanActivity.class);
+		startActivity(intent);
+	}
+	
+	public void onClickViewDevice(View view){
+		Intent intent = new Intent(mContext, DeviceContextActivity.class);
+		startActivity(intent);
 	}
 	
 	private void displayDialogs() {
