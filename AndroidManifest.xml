@@ -30,10 +30,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="deepble.navigation.InformationActivity"
-            android:label="@string/title_activity_information" >
-        </activity>
-        <activity
             android:name="deepble.navigation.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>

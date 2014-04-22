@@ -56,8 +56,5 @@ public class MainActivity extends Activity {
 	}
 	
 	private void displayDialogs() {
-		AlertDialog.Builder podcastDialogBuilder = new AlertDialog.Builder(mContext);
-//		podcastDialogBuilder.setTitle(getResources().getString(R.string.));
-//		podcastDialogBuilder.setMessage(getResources().getString(R.string.);
 	}
 }
