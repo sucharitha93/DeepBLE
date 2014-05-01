@@ -3,48 +3,56 @@
     android:id="@+id/main_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="2"
     android:background="@color/background_color"
     android:orientation="vertical"
     android:paddingBottom="20dip"
     android:paddingLeft="20dip"
-    android:paddingRight="20dip" >
+    android:paddingRight="20dip">
 
     <Button
         android:id="@+id/set_anchor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dip"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:onClick=""
+        android:layout_gravity="top"
         android:text="@string/set_anchor"
         android:textColor="@color/off_white"
-        android:textSize="40sp" />
-
+        android:textSize="40sp"
+        android:onClick="onClickAnchor" 
+        android:background="?android:attr/selectableItemBackground"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dip"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:orientation="horizontal" >
-
+        android:weightSum="1"
+        android:layout_marginTop="20dip"
+        android:orientation="horizontal">
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick=""
+            android:layout_weight="0.5"
             android:text="@string/view_devices"
             android:textColor="@color/off_white"
-            android:textSize="20sp" />
-
+            android:textSize="20sp"
+            android:onClick="onClickViewDevices" 
+            android:background="?android:attr/selectableItemBackground"/>
+        <View
+            android:layout_height="fill_parent"
+            android:layout_width="1dp"
+            android:background="@android:color/darker_gray"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick=""
+            android:layout_weight="0.5"
             android:text="@string/view_information"
             android:textColor="@color/off_white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:onClick="onClickViewInformation" 
+            android:background="?android:attr/selectableItemBackground"/>
     </LinearLayout>
-
 </LinearLayout>

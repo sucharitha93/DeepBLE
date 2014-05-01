@@ -1,6 +1,6 @@
 package deepble.navigation;
 
-import android.app.Service;
+import android.app.Service; 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
@@ -18,6 +18,8 @@ import android.util.Log;
 
 import java.util.List;
 import java.util.UUID;
+
+import deepble.navigation.ProximityGattAttributes;
 
 /**
  * Service for managing connection and data communication with a GATT server hosted on a
@@ -37,15 +39,20 @@ public class BluetoothLeService extends Service {
     private static final int STATE_CONNECTED = 2;
 
     public final static String ACTION_GATT_CONNECTED =
-            "com.example.bluetooth.le.ACTION_GATT_CONNECTED";
+            "deepble.navigation.ACTION_GATT_CONNECTED";
     public final static String ACTION_GATT_DISCONNECTED =
-            "com.example.bluetooth.le.ACTION_GATT_DISCONNECTED";
+            "deepble.navigation.ACTION_GATT_DISCONNECTED";
     public final static String ACTION_GATT_SERVICES_DISCOVERED =
-            "com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED";
+            "deepble.navigation.ACTION_GATT_SERVICES_DISCOVERED";
     public final static String ACTION_DATA_AVAILABLE =
-            "com.example.bluetooth.le.ACTION_DATA_AVAILABLE";
+            "deepble.navigation.ACTION_DATA_AVAILABLE";
     public final static String EXTRA_DATA =
-            "com.example.bluetooth.le.EXTRA_DATA";
+            "deepble.navigation.EXTRA_DATA";
+    
+    public final static UUID UUID_IS_ANCHOR_BOOLEAN =
+            UUID.fromString(ProximityGattAttributes.IS_ANCHOR_BOOLEAN);
+    public final static UUID UUID_USER_DEFINED_NAME =
+            UUID.fromString(ProximityGattAttributes.USER_DEFINED_NAME);
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
@@ -242,6 +249,25 @@ public class BluetoothLeService extends Service {
         }
         mBluetoothGatt.readCharacteristic(characteristic);
     }
+    /**
+     * Write on a given {@code BluetoothGattCharacteristic}. Designed specifically
+     * to allow strings to be written as characteristics.
+     *
+     * @param characteristic The characteristic to write over.
+     * 		  text			 The string to write over onto the characteristic.
+     */
+    
+    
+    public void writeCharacteristic(BluetoothGattCharacteristic characteristic,
+            String text){
+    	if (mBluetoothAdapter == null || mBluetoothGatt == null) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
+            return;
+        }
+        byte[] data = hexStringToByteArray(text);
+        characteristic.setValue(data);
+        mBluetoothGatt.writeCharacteristic(characteristic);
+    }
 
     /**
      * Enables or disables notification on a give characteristic.
@@ -257,13 +283,14 @@ public class BluetoothLeService extends Service {
         }
         mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
 
-        // This is specific to Heart Rate Measurement.
-//        if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
-//           BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-//                  UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
-//            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-//            mBluetoothGatt.writeDescriptor(descriptor);
-//        }
+        // This is specific to Proximity.
+        if (UUID_IS_ANCHOR_BOOLEAN.equals(characteristic.getUuid()) || 
+        		UUID_USER_DEFINED_NAME.equals(characteristic.getUuid())) {
+           BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
+                  UUID.fromString(ProximityGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
+            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            mBluetoothGatt.writeDescriptor(descriptor);
+        }
     }
 
     /**
@@ -277,4 +304,22 @@ public class BluetoothLeService extends Service {
 
         return mBluetoothGatt.getServices();
     }
+    
+    /**
+     * Translates a string of hex characters into a byte array.
+     *
+     * @param  s The hex string to be translated
+     * @return The translated byte array
+     */
+    private byte[] hexStringToByteArray(String s) {
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character
+                    .digit(s.charAt(i + 1), 16));
+        }
+        return data;
+    }
 }
+
+

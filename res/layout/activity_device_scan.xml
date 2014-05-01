@@ -7,3 +7,5 @@
     android:dividerHeight="1sp"
     android:fadeScrollbars="false"
     android:background="@color/background_color" />
+
+

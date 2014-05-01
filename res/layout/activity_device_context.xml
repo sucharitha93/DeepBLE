@@ -20,63 +20,38 @@
             <LinearLayout 
                 android:orientation="horizontal" 
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp" >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/name"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:textSize="18sp"
                     android:textColor="@color/off_white" />
-                <TextView
+                <EditText
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="10dip"
-                    android:textSize="15sp"
-                    android:textColor="@color/off_white" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="@string/edit"
-                    android:textColor="@color/off_white"
-                    android:onClick="onClickEditName" />
+                    android:textSize="18sp"
+                    android:textColor="@color/off_white" 
+                    android:singleLine="true"
+                    android:imeActionLabel="@string/save"
+                    android:hint="@string/enter_name"/>
             </LinearLayout>
             <LinearLayout 
                 android:orientation="horizontal" 
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/uuid"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/off_white" />
-                <TextView
-                    android:id="@+id/user_uuid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dip"
-                    android:textSize="15sp"
-                    android:textColor="@color/off_white" />
-            </LinearLayout>
-            <LinearLayout 
-                android:orientation="horizontal" 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp" >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/current_anchor"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:textSize="18sp"
                     android:textColor="@color/off_white" />
                 <TextView
                     android:id="@+id/user_anchor"
@@ -84,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="10dip"
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:textColor="@color/off_white" />
             </LinearLayout>
         </LinearLayout>
@@ -93,8 +68,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/save"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:textSize="18sp"
         android:textColor="@color/off_white"
         android:onClick="onClickSave" />
 </LinearLayout>
+
