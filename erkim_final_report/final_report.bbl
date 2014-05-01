@@ -1,0 +1,66 @@
+\begin{thebibliography}{1}
+
+\bibitem{apple}
+Apple.
+\newblock {\em i{OS} {D}eveloper {L}ibrary: {C}ore {B}luetooth {P}rogramming
+  {G}uide}.
+\newblock \texttt{https://developer.apple.com/library/ios/
+  documentation/NetworkingInternetWeb/Conceptual/
+  CoreBluetooth\_concepts/AboutCoreBluetooth/ Introduction.html}. Retrieved
+  2014-04-28.
+
+\bibitem{bekkelien}
+Anja Bekkelien.
+\newblock Bluetooth indoor positioning.
+\newblock Master's thesis, University of Geneva, 2012.
+
+\bibitem{feldman}
+Silke Feldmann, Kyandoghere Kyamakya, Ana Zapater, and Zighuo Lue.
+\newblock An indoor bluetooth-based positioning system: Concept, implementation
+  and experimental evaluation.
+\newblock In Weihua Zhuang, Chi-Hsiang Yeh, Olaf Droegehorn, C.-T. Toh, and
+  Hamid~R. Arabnia, editors, {\em International Conference on Wireless
+  Networks}, pages 109--113, 2003.
+
+\bibitem{android}
+Google.
+\newblock {\em Android {D}evelopers: Bluetooth {L}ow {E}nergy}.
+\newblock \texttt{http://developer.android.com/guide/topics/
+  connectivity/bluetooth-le.html}. Retrieved 2014-04-28.
+
+\bibitem{gottipati}
+Gottipati Harry.
+\newblock With i{B}eacon, {A}pple is going to dump on {NFC} and embrace the
+  internet of things.
+\newblock
+  \texttt{http://gigaom.com/2013/09/10/with-ibeacon-apple-is-going-to-dump-on-nfc-and-embrace-
+  the-internet-of-things/}, 2013.
+
+\bibitem{indoo.rs}
+Indoo.rs.
+\newblock {BLE} based indoor positioning.
+\newblock http://indoo.rs/.
+\newblock Indoo.rs offers a BLE based indoor navigation SDK to integrate with
+  existing applications. It includes navigation capabilities, analytics on user
+  movement, and routing tools. Retreived 2014-04-28.
+
+\bibitem{senion}
+SenionLab{,} Meridian.
+\newblock \texttt{http://senionlab.com} and \texttt{http://meridianapps.com}.
+\newblock SenionLab and Meridian both offer wifi based indoor navigation APIs
+  to integrate with existing applications. Retrieved 2014-04-28.
+
+\bibitem{renaudin}
+Valerie Renaudin, Okan Yalak, Philip Tome, and Betrand Merminod.
+\newblock Indoor navigation of emergency agents.
+\newblock {\em European Journal of Navigation}, 5(3), July 2007.
+
+\bibitem{bluetooth_core}
+Bluetooth SIG.
+\newblock {\em {B}luetooth {C}ore {S}pecification {V}ersion 4.0}.
+\newblock Bluetooth, June 2010.
+\newblock
+  \texttt{https://www.bluetooth.org/en-us/specification/adopted-specifications}.
+  Retrieved 2014-04-30.
+
+\end{thebibliography}
