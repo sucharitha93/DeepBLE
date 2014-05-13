@@ -1,0 +1,293 @@
+
+% Many thanks to Andrew West for writing most of this file
+% Main LaTeX file for CIS400/401 Project Proposal Specification
+%
+% Once built and in PDF form this document outlines the format of a
+% project proposal. However, in raw (.tex) form, we also try to
+% comment on some basic LaTeX technique. This is not intended to be a
+% LaTeX tutorial, instead just (1) a use-case thereof, and (2) a
+% template for your own writing.
+
+% Ordinarily we'd begin by specifying some broad document properties
+% like font-size, page-size, margins, etc. -- We have done this (and
+% much more) for you by creating a 'style file', which the
+% 'documentclass' command references.
+\documentclass{sig-alternate}
+ 
+% These 'usepackage' commands are a way of importing additional LaTeX
+% styles and formattings that aren't part of the 'standard library'
+\usepackage{mdwlist}
+\usepackage{url}
+
+\begin{document} 
+
+% We setup the parameters to our title header before 'making' it. Note
+% that your proposals should have actual titles, not the generic one
+% we have here.
+\title{Optimizing shopping effectiveness in departmental stores and shopping malls}
+\subtitle{Dept. of CIS - Senior Design 2013-2014\thanks{Advisor: Insup Lee (lee@cis.upenn.edu).}~}
+\numberofauthors{2}
+\author{
+\alignauthor Eric Kim \\ \email{erkim@seas.upenn.edu} \\ Univ. of Pennsylvania \\ Philadelphia, PA
+\alignauthor  Aditya Sood\\ \email{asood@seas.upenn.edu} \\ Univ. of Pennsylvania \\ Philadelphia, PA}
+\date{10/14/2013}
+\maketitle
+
+% Next we write out our abstract -- generally a two paragraph maximum,
+% executive summary of the motivation and contributions of the work.
+
+\begin{abstract}
+  \textit{There are two main problems associated with optimizing
+    shopping effectiveness in department stores and malls. One,  
+    the underlying computation, the traveling salesman problem, 
+    is NP-Hard. Although there are many well known heurisitics 
+    to the problem, finding an exact solution for all inputs is 
+    inplausible, especially within the scope of this project. Second, 
+    the existing technology used to track location is not always 
+    feasible. Currently, mobile phones are the primary method of 
+    navigation, and the current standard relies on Wifi networks. 
+    Although there are newer APIs being developed, namely Low 
+    Energy Bluetooth, the issue remains that all-knowing devices
+    are still far into the future.
+    }
+
+  \textit{With these two problems in mind, we aim to provide a 
+    solution that effectively reconciles these two issues. With a few 
+    assumptions, we hope to create a new lightweight navigation 
+    API specifically designed for indoor use. Our target consumer 
+    is departmental stores who will use the API within their own 
+    app, and provide it to their customers to allow them to find 
+    optimal shopping routes.}
+\end{abstract}
+
+% Then we proceed into the body of the report itself. The effect of
+% the 'section' command is obvious, but also notice 'label'. Its good
+% practice to label every (sub)-section, graph, equation etc. -- this
+% gives us a way to dynamically reference it later in the text via the
+% 'ref' command.
+\section{Introduction}
+\label{sec:intro}
+ With the widespread availability of the smart phone, individual 
+navigation has been refined such that a user can navigate to and 
+from a particular address. The standard used today for outdoor 
+navigation relies on GPS satellites to track the device location. GPS 
+is generally not well suited for indoor use for two reasons - 1. GPS 
+does not provide a high level of accuracy, and 2. the GPS signal 
+breaks down indoors. So rather than using GPS satellites, indoor 
+navigation and positioning has been accomplished largely through 
+using networks of nearby "anchors" that have a static, known position. 
+Most commonly used anchors today are Wifi networks. The device 
+detects a Wifi network with a unique ID; with the wifi access point, 
+we can triangulate the exact position of the device. Indeed there are 
+several existing companies that will set up the necessary pieces to 
+allow for step by step navigation through a shopping mall or a 
+departmental store.\footnote{ See meridianapps.com and senionlab.com}
+
+Google and Apple have both introduced a technology called Low 
+Energy Bluetooth, also known as BLE or Bluetooth Smart, that 
+introduces a new way to navigate indoors. Apple in their recent 
+release of iOS7 has included an API called iBeacon, that will use BLE
+extensively for the purpose of precise geolocation.\footnote{"Core 
+Bluetooth Programming Guide" iOS Developer Library} Any "beacon" 
+that is set up will be available for general iPhone users to navigate
+with; what makes this technology remarkable is that BLE uses very
+little energy, as the name suggests, has considerable range, especially
+compared to Wifi networks, and most importantly, beacons can be
+setup anywhere. Any iPhone device can be set as a beacon, and 
+devices designed specifically for the use of becaons can be purchased.
+Similarily, Android in their most recent OS release 4.3 has implemented
+BLE as well, providing a well defined 
+API\footnote{Android Developer guide to connectivity, see Bluetooth LE
+http://developer.android.com/guide/topics/connectivity} 
+to develop upon. As of the 
+writing of this paper, only the most recent devices even have BLE 
+hardware built in, and on top of that only select devices have the OS 
+that provides a native API to utilize BLE, so suffice it to say BLE as 
+a method of navigation is still in its early stages.
+
+In addition to the technology used to implement the navigation, we
+must address the actual algorithm used. The Traveling Salesman 
+problem is a well known and well defined problem in computer science
+so we will not be covering the details of the TSP. The project 
+proposed deals with a special case of the Traveling Salesman problem; 
+namely given a set of anchors, what is the optimal path that visits a 
+select subset of the anchors. The "edges" in this case aren't as
+straightforward as simply the straight line distance between two points,
+or even the Manhattan distance between them. Department stores and
+shopping malls will usually have set paths that the customers must walk
+through. In addtion, optimal may not be as simple as the shortest 
+distance; a customer may be interested in minimizing costs, allowing
+for "eye shopping", minimizing time in the store, etc. 
+
+% The header of this document might have been a little intimidatating
+% to beginners. Notice once you are in the body of the document,
+% however, LaTeX commands are minimal and 'normal text' is frequent.
+\section{Related Work}
+\label{sec:related_work}
+Fully functional Indoor navigation apps, although a relatively recent 
+invention, have been implemented before. For example, the company
+SenionLab provides a way for third parties to integrate an indoor
+navigation API to their existing application.\footnote{SenionLab:
+The website contains a splendid video demonstrating the capabilities 
+of their turn by turn navigation http://www.senionlab.com } The 
+API includes location based advertising, allowing for companies to 
+send tailored advertisements to the customers that walk by their store, 
+location analytics, the ability to gather data on user behavior and most
+importantly, a fully functional step by step navigation system at the
+granular level. However, there are some shortcomings that current
+indoor navigation apps have in common. Most widespread is the 
+dependence on existing Wifi access points as the anchors. Although 
+this allows for the application to pinpoint the exact location of the 
+device and track it as it moves, it does not provide environmental
+awareness. These Wifi based implementations do not carry any 
+data about a particular location, such as whether a store carries a 
+particular product, or if the store is currently having a sale. A 
+fundamental assumption is being made in this case, that is, 
+customers already know \textit{where they want to go}, rather than 
+\textit{what they want to buy}, and this is the fundamental issue
+we seek to resolve.
+
+With BLE we no longer have to make this assumption. BLE signal 
+transmitters are low cost: for example, for Apple's iBeacon, "beacons"
+as they're called, cost as little as 30 or 40 dollars.  As their name
+suggests, BLE uses little energy. Most important of all, they can be
+ubiquitous - a shopping mall where every store has a proximity
+sensor, or an anchor, and we can achieve much more granularity
+than Wifi access points could ever provide. With this granularity 
+comes enriched data - anchors no longer just provide a specific 
+location, they can provide specialized promotions, specific 
+directions, and most important for our purposes, personalized 
+recommendations.\footnote{Harry Gottipati, "With iBeacon, Apple is 
+going to dump on NFC and embrace the internet of things", 
+gigaom.com, September 9, 2013}
+This means that a customer, with his/her list of shopping needs
+can navigate through a shopping mall or departmental store and
+find detailed offers based on what he/she would like to purchase.
+
+So now that we have a method of achieving a high level of 
+granularity, how do we compute an optimal path using all this
+rich data? We might gain insight by looking at existing applications
+that provide shopping list applications. 
+Aisle411\footnote{Aisle411 aisle411.com}, for example, provides 
+an API that allows for granular location navigation as well as product 
+search. A customer using an Aisle411 integrated app can search for 
+a product and the app will correctly direct the customer to the exact 
+spot where the product is. Curiously, a customer can also enter in a 
+shopping list and "Sort shopping lists by aisle location." ~\cite{aisle411}
+Perhaps Aisle411 is reluctant to reveal how exactly their "navigate by 
+shopping list" works. Even so, its clear that the issue of writing an 
+efficient algorithm that returns an optimal path that visits each location 
+is not an easy one. This comes back to the computational complexity
+of the Traveling Salesman Problem.
+There is additional complexity regarding shopping malls. Whereas 
+departmental stores have a single vested party, shopping malls offer
+a variety of brands and offerings that must be taken into account. For
+instance, if the shopper is looking for clothes, it is not enough for the
+app to send the shopper to the nearest clothes store. Price, brand, 
+proximity, consumer segmentation, all must be taken into consideration
+
+% Here we see our first citations. It's just a simple command, the
+% body of which is the keyword-label assigned to resources over in the
+% *.bib file
+Fortunately, \LaTeX{} makes citations easy. Your TA has had no 
+difficulty, as the work of Wang \textit{et al.}~\cite{wang13} 
+demonstrates. Need help with \LaTeX{}?Be sure to check 
+out~\cite{latex_wikibook} and~\cite{ctan_pdf}, two
+helpful on-line resources.
+
+
+Let us return to your factorization proposal. You should put out the
+earliest related work; na\"{i}ve methods like trial divison and the
+Sieve of Eratosthenes, but state they are of no modern relevance. Then
+discuss modern methods like the Quadratic Sieve and General Number
+Field Sieve. Note the humongous time and memory bounds of these
+algorithms. But wait! You are going to propose a better way $\ldots$
+Conclude this section with a brief explanation of where your work fits
+in and how it is related to existing work.
+
+\section{Project Proposal}
+\label{sec:project_proposal}
+Now is the time to introduce your proposed project in all of its
+glory. Admittedly, this is not the easiest since you probably have not
+done much actual research yet. Even so, setting and realizing
+realistic research goals is an important skill. Begin by summarizing
+what you are going to do and the expected benefit it will bring.
+
+\subsection{Anticipated Approach}
+\label{subsec:approach}
+In this case you might want to talk about establishing a server to
+receive pictures via MMS. Once the picture is received, you will run
+an edge extraction algorithm over it. Then, similarity between the
+submitted picture and those stored (and tagged) in a MySQL database
+will be computing using algorithm $XYZ$. Finally, the tag of the most
+similar image will be returned to the user. Do not bore the reader
+with trivial details, but give them an overview; a block-flow diagram
+would prove helpful (and is required).
+
+\subsection{Technical Challenges}
+\label{subsec:tech_challenges}
+There are three main technical challenges involved with this project.
+First, we have to build a functional app using fairly new technology, 
+used in a very new way. Indoor navigation using BLE is unprecedented 
+as mobile operating systems are just now providing APIs to use BLE 
+as a geofencing tool. BLE itself was introduced in 2006, and it was
+only merged into the Bluetooth standard in 2010\footnote{bluetooth.com}
+
+\subsection{Evaluation Criteria}
+\label{subsec:eval_criteria}
+Suppose you have implemented your approach and it is functioning. Now
+how are you going to convince readers your approach is better than
+what exists? In the factorization example, you could just compare
+run-times between algorithms run on the same input. The image
+recognition example might use a percentage of accurate
+classifications. Other fields may have established testing benchmarks.
+
+No matter the case, you need to prove you have contributed to the
+field. This will be easier for some than others. In particular, those
+with `sensory' projects involving visual or sonic elements need to
+think this point through -- objective measures are always better than
+subjective ones.
+
+\section{Research Timeline}
+\label{sec:research_timeline}
+Since this project is much more focused on implementation over
+research, most of the time will be devoted to building features of 
+the end product. We will use agile processes (specifically, SCRUM 
+with elements of extreme programming when meeting with our 
+advisor, who works at Goldman Sachs) to complete our project.
+
+The general format will follow two week sprint cycles, where a fully 
+functional feature will be implemented by the end of each cycle. In
+any given cycle, a feature will be implemented, tested, and refactored. 
+Of course in the early stages, the emphasis will be on research
+\begin{itemize*}
+	\item {\sc already completed}: Preliminary reading. \vspace{3pt}
+	\item {\sc prior-to thanksgiving} : Research on Traveling salesman problem, particularly how a solution will be implemented given the resources. Formulate the framework of the app - what platform will it be built on, what APIs will be needed.\vspace{3pt}
+	\item {\sc prior-to christmas} : Have an API that fully implements BLE navigation - Detecting BLE transmitters is the main feature to accomplish.\vspace{3pt}
+	\item {\sc completion tasks} : Verify implementation is bug-free. Conduct accuracy testing. Complete write-up.\vspace{3pt}
+	\item {\sc if there's time} : Make the API relatively user/app friendly - ideally it needs to be
+lightweight (we do not want BLE navigation consuming large amounts of resources), and easy to use (a developer looking to drop this into their app should intuitively be able to integrate with the app).
+\end{itemize*}
+
+% We next move onto the bibliography.
+\bibliographystyle{plain} % Please do not change the bib-style
+\bibliography{prop_spec}  % Just the *.BIB filename
+
+% Here is a dirty hack. We insert so much vertical space that the
+% appendices, which want to begin in the left colunm underneath
+% "references", are pushed over to the right-hand column. If we looked
+% hard enough, there is probably a command to do exactly this (and
+% wouldn't need tweaked after edits).
+
+% We then use appendices to share some additional information with
+% you, though you won't need appendices in your own proposal.
+\appendix
+\section{Other Specifics}
+\label{app:other_specifics}
+
+
+% The usage of 'enumerate' (similar to 'itemize') we talked about
+% above
+
+\end{document} 
+
